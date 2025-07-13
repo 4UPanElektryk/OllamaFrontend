@@ -1,4 +1,6 @@
 ﻿using Newtonsoft.Json;
+using OllamaApiClasses.Requests;
+using OllamaApiClasses.Responses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,14 +66,14 @@ namespace Ollama_Frontend
 				if (response.IsSuccessStatusCode)
 				{
 					string content = response.Content.ReadAsStringAsync().Result;
-					/*List<string> models = JsonConvert.DeserializeObject<List<string>>(content);
+					reModels models = JsonConvert.DeserializeObject<reModels>(content);
 					lvModels.Items.Clear();
 
 
-					foreach (var model in models)
+					foreach (var model in models.models)
 					{
-						lbModels.Items.Add(model);
-					}*/
+						lvModels.Items.Add(new ListViewItem(new string[] { model.name, SizeConverter.getSize(model.size), model.digest }));
+					}
 				}
 				else
 				{
@@ -95,9 +97,9 @@ namespace Ollama_Frontend
 				client.BaseAddress = new Uri($"http://{ollamaHost}/");
 				try
 				{
-					PullRequest pullRequest = new PullRequest
+					rqPull pullRequest = new rqPull()
 					{
-						name = modelName
+						name = modelName,
 					};
 					var response = client.SendAsync(
 						new HttpRequestMessage(HttpMethod.Post, $"/api/pull")

@@ -68,7 +68,6 @@
     <Compile Include="ProgressDialog.Designer.cs">
       <DependentUpon>ProgressDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="OllamaApiClasses\ProgressResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PullDialog.cs">
       <SubType>Form</SubType>
@@ -76,7 +75,6 @@
     <Compile Include="PullDialog.Designer.cs">
       <DependentUpon>PullDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="OllamaApiClasses\PullRequest.cs" />
     <Compile Include="SizeConverter.cs" />
     <EmbeddedResource Include="ConnectDialog.resx">
       <DependentUpon>ConnectDialog.cs</DependentUpon>
@@ -112,6 +110,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OllamaApiClasses\OllamaApiClasses.csproj">
+      <Project>{6901ac3a-c9fe-406a-aa5d-027a16d0cd29}</Project>
+      <Name>OllamaApiClasses</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

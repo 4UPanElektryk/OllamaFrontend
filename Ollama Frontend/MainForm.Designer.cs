@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.lbHost = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
@@ -35,8 +36,17 @@
 			this.btnRefresh = new System.Windows.Forms.Button();
 			this.btnPull = new System.Windows.Forms.Button();
 			this.lvModels = new System.Windows.Forms.ListView();
+			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+			this.button2 = new System.Windows.Forms.Button();
+			this.ModelContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.openChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
+			this.ModelContextMenu.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -74,6 +84,7 @@
 			// 
 			// groupBox2
 			// 
+			this.groupBox2.Controls.Add(this.button2);
 			this.groupBox2.Controls.Add(this.btnRefresh);
 			this.groupBox2.Controls.Add(this.btnPull);
 			this.groupBox2.Controls.Add(this.lvModels);
@@ -110,14 +121,76 @@
 			// lvModels
 			// 
 			this.lvModels.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-			this.lvModels.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.lvModels.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.lvModels.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader3});
+			this.lvModels.ContextMenuStrip = this.ModelContextMenu;
 			this.lvModels.ForeColor = System.Drawing.Color.White;
-			this.lvModels.HideSelection = false;
+			this.lvModels.FullRowSelect = true;
+			this.lvModels.GridLines = true;
+			this.lvModels.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
 			this.lvModels.Location = new System.Drawing.Point(6, 48);
+			this.lvModels.MultiSelect = false;
 			this.lvModels.Name = "lvModels";
+			this.lvModels.ShowItemToolTips = true;
 			this.lvModels.Size = new System.Drawing.Size(543, 372);
 			this.lvModels.TabIndex = 0;
 			this.lvModels.UseCompatibleStateImageBehavior = false;
+			this.lvModels.View = System.Windows.Forms.View.Details;
+			// 
+			// columnHeader1
+			// 
+			this.columnHeader1.Text = "Model Name";
+			this.columnHeader1.Width = 370;
+			// 
+			// columnHeader2
+			// 
+			this.columnHeader2.Text = "Model Size";
+			this.columnHeader2.Width = 80;
+			// 
+			// columnHeader3
+			// 
+			this.columnHeader3.Text = "Digest";
+			this.columnHeader3.Width = 84;
+			// 
+			// button2
+			// 
+			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button2.Location = new System.Drawing.Point(290, 19);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(97, 23);
+			this.button2.TabIndex = 3;
+			this.button2.Text = "Upload Modelfile";
+			this.button2.UseVisualStyleBackColor = true;
+			// 
+			// ModelContextMenu
+			// 
+			this.ModelContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.copyToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.openChatToolStripMenuItem});
+			this.ModelContextMenu.Name = "ModelContextMenu";
+			this.ModelContextMenu.Size = new System.Drawing.Size(132, 70);
+			// 
+			// copyToolStripMenuItem
+			// 
+			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+			this.copyToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.copyToolStripMenuItem.Text = "Copy";
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.deleteToolStripMenuItem.Text = "Delete";
+			// 
+			// openChatToolStripMenuItem
+			// 
+			this.openChatToolStripMenuItem.Name = "openChatToolStripMenuItem";
+			this.openChatToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.openChatToolStripMenuItem.Text = "Open Chat";
 			// 
 			// MainForm
 			// 
@@ -132,6 +205,7 @@
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
 			this.groupBox2.ResumeLayout(false);
+			this.ModelContextMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
 
 		}
@@ -145,6 +219,14 @@
 		private System.Windows.Forms.Button btnRefresh;
 		private System.Windows.Forms.Button btnPull;
 		private System.Windows.Forms.Label lbHost;
+		private System.Windows.Forms.ColumnHeader columnHeader1;
+		private System.Windows.Forms.ColumnHeader columnHeader2;
+		private System.Windows.Forms.ColumnHeader columnHeader3;
+		private System.Windows.Forms.Button button2;
+		private System.Windows.Forms.ContextMenuStrip ModelContextMenu;
+		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem openChatToolStripMenuItem;
 	}
 }
 

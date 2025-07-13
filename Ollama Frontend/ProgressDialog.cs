@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OllamaApiClasses.Responses;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +21,7 @@ namespace Ollama_Frontend
 		public ProgressDialog(StreamReader Info, string Title)
         {
             InitializeComponent();
-			ProgressResponse response = new ProgressResponse
+			reProgress response = new reProgress
 			{
 				status = "",
 				digest = "",
@@ -38,7 +39,7 @@ namespace Ollama_Frontend
 			string previousStatus = "";
 			while ((line = reader.ReadLine()) != null)
 			{
-				ProgressResponse response = JsonConvert.DeserializeObject<ProgressResponse>(line);
+				reProgress response = JsonConvert.DeserializeObject<reProgress>(line);
 				if (count % 100 == 0 || response.status != previousStatus)
 				{
 					previousStatus = response.status;
@@ -72,13 +73,8 @@ namespace Ollama_Frontend
 				this.Size = new Size(this.Size.Width, this.Size.Height - tbDetails.Height);
 			}
 		}
-		private void SetInfoFromResponse(ProgressResponse response)
+		private void SetInfoFromResponse(reProgress response)
 		{
-			if (response == null)
-			{
-				tbDetails.Text = "No response received.";
-				return;
-			}
 			if (InvokeRequired)
 			{
 				Invoke(new Action(() => SetInfoFromResponse(response)));
