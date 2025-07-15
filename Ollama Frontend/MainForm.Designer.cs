@@ -30,16 +30,17 @@
 		{
 			this.components = new System.ComponentModel.Container();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.lbVersion = new System.Windows.Forms.Label();
 			this.lbHost = new System.Windows.Forms.Label();
 			this.button1 = new System.Windows.Forms.Button();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.button2 = new System.Windows.Forms.Button();
 			this.btnRefresh = new System.Windows.Forms.Button();
 			this.btnPull = new System.Windows.Forms.Button();
 			this.lvModels = new System.Windows.Forms.ListView();
 			this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-			this.button2 = new System.Windows.Forms.Button();
 			this.ModelContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,6 +52,7 @@
 			// 
 			// groupBox1
 			// 
+			this.groupBox1.Controls.Add(this.lbVersion);
 			this.groupBox1.Controls.Add(this.lbHost);
 			this.groupBox1.Controls.Add(this.button1);
 			this.groupBox1.ForeColor = System.Drawing.Color.White;
@@ -61,10 +63,19 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Server";
 			// 
+			// lbVersion
+			// 
+			this.lbVersion.AutoSize = true;
+			this.lbVersion.Location = new System.Drawing.Point(6, 72);
+			this.lbVersion.Name = "lbVersion";
+			this.lbVersion.Size = new System.Drawing.Size(80, 13);
+			this.lbVersion.TabIndex = 2;
+			this.lbVersion.Text = "Ollama Version:";
+			// 
 			// lbHost
 			// 
 			this.lbHost.AutoSize = true;
-			this.lbHost.Location = new System.Drawing.Point(6, 24);
+			this.lbHost.Location = new System.Drawing.Point(6, 48);
 			this.lbHost.Name = "lbHost";
 			this.lbHost.Size = new System.Drawing.Size(64, 13);
 			this.lbHost.TabIndex = 1;
@@ -74,13 +85,13 @@
 			// 
 			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button1.ForeColor = System.Drawing.Color.White;
-			this.button1.Location = new System.Drawing.Point(134, 19);
+			this.button1.Location = new System.Drawing.Point(9, 19);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(75, 23);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Connect";
 			this.button1.UseVisualStyleBackColor = true;
-			this.button1.Click += new System.EventHandler(this.button1_Click);
+			this.button1.Click += new System.EventHandler(this.btnConnect_Click);
 			// 
 			// groupBox2
 			// 
@@ -95,6 +106,17 @@
 			this.groupBox2.TabIndex = 1;
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Models";
+			// 
+			// button2
+			// 
+			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button2.Location = new System.Drawing.Point(290, 19);
+			this.button2.Name = "button2";
+			this.button2.Size = new System.Drawing.Size(97, 23);
+			this.button2.TabIndex = 3;
+			this.button2.Text = "Upload Modelfile";
+			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.btnUpload_Click);
 			// 
 			// btnRefresh
 			// 
@@ -131,6 +153,7 @@
 			this.lvModels.FullRowSelect = true;
 			this.lvModels.GridLines = true;
 			this.lvModels.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+			this.lvModels.HideSelection = false;
 			this.lvModels.Location = new System.Drawing.Point(6, 48);
 			this.lvModels.MultiSelect = false;
 			this.lvModels.Name = "lvModels";
@@ -154,16 +177,6 @@
 			// 
 			this.columnHeader3.Text = "Digest";
 			this.columnHeader3.Width = 84;
-			// 
-			// button2
-			// 
-			this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.button2.Location = new System.Drawing.Point(290, 19);
-			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(97, 23);
-			this.button2.TabIndex = 3;
-			this.button2.Text = "Upload Modelfile";
-			this.button2.UseVisualStyleBackColor = true;
 			// 
 			// ModelContextMenu
 			// 
@@ -227,6 +240,7 @@
 		private System.Windows.Forms.ToolStripMenuItem copyToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem openChatToolStripMenuItem;
+		private System.Windows.Forms.Label lbVersion;
 	}
 }
 

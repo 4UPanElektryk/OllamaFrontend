@@ -61,6 +61,7 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ModelfileParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProgressDialog.cs">
       <SubType>Form</SubType>
@@ -76,6 +77,12 @@
       <DependentUpon>PullDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="SizeConverter.cs" />
+    <Compile Include="UploadModelfileDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UploadModelfileDialog.Designer.cs">
+      <DependentUpon>UploadModelfileDialog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ConnectDialog.resx">
       <DependentUpon>ConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -96,6 +103,9 @@
     </Compile>
     <EmbeddedResource Include="PullDialog.resx">
       <DependentUpon>PullDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UploadModelfileDialog.resx">
+      <DependentUpon>UploadModelfileDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
