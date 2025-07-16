@@ -49,17 +49,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChatWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChatWindow.Designer.cs">
+      <DependentUpon>ChatWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConnectDialog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConnectDialog.Designer.cs">
       <DependentUpon>ConnectDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="MainForm.cs">
+    <Compile Include="CopyDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="CopyDialog.Designer.cs">
+      <DependentUpon>CopyDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="ModelfileParser.cs" />
     <Compile Include="Program.cs" />
@@ -83,11 +95,17 @@
     <Compile Include="UploadModelfileDialog.Designer.cs">
       <DependentUpon>UploadModelfileDialog.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ChatWindow.resx">
+      <DependentUpon>ChatWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConnectDialog.resx">
       <DependentUpon>ConnectDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <EmbeddedResource Include="CopyDialog.resx">
+      <DependentUpon>CopyDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProgressDialog.resx">
       <DependentUpon>ProgressDialog.cs</DependentUpon>

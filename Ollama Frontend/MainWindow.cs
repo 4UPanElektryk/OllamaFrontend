@@ -2,24 +2,19 @@
 using OllamaApiClasses.Requests;
 using OllamaApiClasses.Responses;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.Serialization;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Ollama_Frontend
 {
-    public partial class MainForm: Form
+    public partial class MainWindow: Form
     {
 		public string ollamaHost;
-		public MainForm()
+		public MainWindow()
         {
             InitializeComponent();
 			this.Text = "Ollama Frontend";
@@ -142,27 +137,6 @@ namespace Ollama_Frontend
 				}
 			}
 		}
-
-		[Serializable]
-		internal class OllamaException : Exception
-		{
-			public OllamaException()
-			{
-			}
-
-			public OllamaException(string message) : base(message)
-			{
-			}
-
-			public OllamaException(string message, Exception innerException) : base(message, innerException)
-			{
-			}
-
-			protected OllamaException(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-
 		private void btnUpload_Click(object sender, EventArgs e)
 		{
 			UploadModelfileDialog uploadDialog = new UploadModelfileDialog();
@@ -175,7 +149,7 @@ namespace Ollama_Frontend
 			string modelName = uploadDialog.ModelName; // Assuming you have a property to get the model name
 
 			rqCreate create = ModelfileParser.Parse(
-				System.IO.File.ReadAllLines(filePath),
+				File.ReadAllLines(filePath),
 				modelName
 			);
 
@@ -215,6 +189,135 @@ namespace Ollama_Frontend
 			catch (Exception ex)
 			{
 				MessageBox.Show("Error uploading model: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+		}
+
+		private void openChatToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Debug.WriteLine("Open Chat ToolStripMenuItem Clicked");
+			if (lvModels.SelectedItems.Count == 0)
+			{
+				MessageBox.Show("Please select a model to chat with.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+			string modelName = lvModels.SelectedItems[0].SubItems[0].Text;
+			Debug.WriteLine($"Selected Model: {modelName}");
+			if (string.IsNullOrEmpty(modelName))
+			{
+				MessageBox.Show("Selected model name is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			ChatWindow chatWindow = new ChatWindow(modelName, ollamaHost);
+			chatWindow.Show();
+		}
+
+		private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string[] allmodels = lvModels.Items.Cast<ListViewItem>().Select(item => item.SubItems[0].Text).ToArray();
+			string modelName = lvModels.SelectedItems[0].SubItems[0].Text;
+			CopyDialog copyDialog = new CopyDialog(modelName, allmodels);
+			DialogResult result = copyDialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				string newModelName = copyDialog.NewModelName;
+				Debug.WriteLine($"Copying Model: {modelName} to {newModelName}");
+				HttpClient client = new HttpClient();
+				client.BaseAddress = new Uri($"http://{ollamaHost}/");
+				try
+				{
+					rqCreate createRequest = new rqCreate()
+					{
+						model = newModelName,
+						from = modelName,
+					};
+					var response = client.SendAsync(
+						new HttpRequestMessage(HttpMethod.Post, $"/api/create")
+						{
+							Content = new StringContent(
+							JsonConvert.SerializeObject(createRequest),
+							Encoding.UTF8,
+							"application/json"
+							)
+						}
+					).Result;
+					if (response.IsSuccessStatusCode)
+					{
+						MessageBox.Show($"Model '{modelName}' copied to '{newModelName}' successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						btnRefresh.PerformClick(); // Refresh the model list after copying
+					}
+					else
+					{
+						MessageBox.Show("Failed to copy model: " + response.ReasonPhrase, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error copying model: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+			}
+			else
+			{
+				return;
+			}
+		}
+
+		private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Debug.WriteLine("Open Chat ToolStripMenuItem Clicked");
+			if (lvModels.SelectedItems.Count == 0)
+			{
+				MessageBox.Show("Please select a model to chat with.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+			string modelName = lvModels.SelectedItems[0].SubItems[0].Text;
+			Debug.WriteLine($"Selected Model: {modelName}");
+			if (string.IsNullOrEmpty(modelName))
+			{
+				MessageBox.Show("Selected model name is empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
+			}
+
+			DialogResult result = MessageBox.Show(
+				$"Are you sure you want to delete the model '{modelName}'?",
+				"Confirm Delete",
+				MessageBoxButtons.YesNo,
+				MessageBoxIcon.Warning
+			);
+			if (result == DialogResult.Yes)
+			{
+				HttpClient client = new HttpClient();
+				client.BaseAddress = new Uri($"http://{ollamaHost}/");
+				try
+				{
+					rqDelete deleteRequest = new rqDelete()
+					{
+						name = modelName,
+					};
+					var response = client.SendAsync(
+						new HttpRequestMessage(HttpMethod.Delete, $"/api/delete")
+						{
+							Content = new StringContent(
+							JsonConvert.SerializeObject(deleteRequest),
+							Encoding.UTF8,
+							"application/json"
+							)
+						}
+					).Result;
+					if (response.IsSuccessStatusCode)
+					{
+						MessageBox.Show($"Model '{modelName}' deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						btnRefresh.PerformClick(); // Refresh the model list after deletion
+					}
+					else
+					{
+						MessageBox.Show("Failed to delete model: " + response.ReasonPhrase, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show("Error deleting model: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
 			}
 		}
 	}

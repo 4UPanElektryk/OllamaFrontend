@@ -12,10 +12,7 @@ namespace Ollama_Frontend
 {
     public partial class PullDialog: Form
     {
-		public string ModelName
-		{
-			get { return tbModelName.Text; }
-		}
+		public string ModelName => tbModelName.Text.Trim();
 
 		public PullDialog()
         {

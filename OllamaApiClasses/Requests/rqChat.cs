@@ -5,14 +5,15 @@ using System.Text;
 namespace OllamaApiClasses.Requests
 {
 	// POST /api/chat
-	public class rqChat
+	public struct rqChat
 	{
 		// required
 		public string model { get; set; }
-		public ChatMessage messages { get; set; }
+		public ChatMessage[] messages { get; set; }
+		// optional
 		public string tools { get; set; } // JSON string of tools, or null if no tools are used
-		public bool stream { get; set; } = true; // default is false, set to true for streaming responses
-		public bool think { get; set; } = false;
+		public bool? stream { get; set; } // default is false, set to true for streaming responses
+		public bool? think { get; set; } // default is false, set to true if you want the model to think if you are using a thinking model
 		public string format { get; set; }
 		public string options { get; set; } // JSON string of options, or null if no options are used
 		/// <summary>

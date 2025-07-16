@@ -1,6 +1,6 @@
 ﻿namespace Ollama_Frontend
 {
-	partial class MainForm
+	partial class MainWindow
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -42,9 +42,9 @@
 			this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
 			this.ModelContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.openChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.openChatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.groupBox1.SuspendLayout();
 			this.groupBox2.SuspendLayout();
 			this.ModelContextMenu.SuspendLayout();
@@ -181,31 +181,34 @@
 			// ModelContextMenu
 			// 
 			this.ModelContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openChatToolStripMenuItem,
             this.copyToolStripMenuItem,
-            this.deleteToolStripMenuItem,
-            this.openChatToolStripMenuItem});
+            this.deleteToolStripMenuItem});
 			this.ModelContextMenu.Name = "ModelContextMenu";
-			this.ModelContextMenu.Size = new System.Drawing.Size(132, 70);
-			// 
-			// copyToolStripMenuItem
-			// 
-			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
-			this.copyToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-			this.copyToolStripMenuItem.Text = "Copy";
-			// 
-			// deleteToolStripMenuItem
-			// 
-			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-			this.deleteToolStripMenuItem.Text = "Delete";
+			this.ModelContextMenu.Size = new System.Drawing.Size(181, 92);
 			// 
 			// openChatToolStripMenuItem
 			// 
 			this.openChatToolStripMenuItem.Name = "openChatToolStripMenuItem";
-			this.openChatToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+			this.openChatToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
 			this.openChatToolStripMenuItem.Text = "Open Chat";
+			this.openChatToolStripMenuItem.Click += new System.EventHandler(this.openChatToolStripMenuItem_Click);
 			// 
-			// MainForm
+			// copyToolStripMenuItem
+			// 
+			this.copyToolStripMenuItem.Name = "copyToolStripMenuItem";
+			this.copyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.copyToolStripMenuItem.Text = "Copy";
+			this.copyToolStripMenuItem.Click += new System.EventHandler(this.copyToolStripMenuItem_Click);
+			// 
+			// deleteToolStripMenuItem
+			// 
+			this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+			this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.deleteToolStripMenuItem.Text = "Delete";
+			this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+			// 
+			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -213,7 +216,7 @@
 			this.ClientSize = new System.Drawing.Size(800, 450);
 			this.Controls.Add(this.groupBox2);
 			this.Controls.Add(this.groupBox1);
-			this.Name = "MainForm";
+			this.Name = "MainWindow";
 			this.Text = "Ollama UI";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();

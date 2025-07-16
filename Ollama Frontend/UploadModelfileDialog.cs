@@ -1,25 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using System;
 using System.Windows.Forms;
+using static System.Windows.Forms.LinkLabel;
 
 namespace Ollama_Frontend
 {
 	public partial class UploadModelfileDialog : Form
 	{
-		public string FilePath { 			
-			get { return txtFilePath.Text; }
-			set { txtFilePath.Text = value; }
-		}
-		public string ModelName { 
-			get { return txtModelname.Text; }
-			set { txtModelname.Text = value; }
-		}
+		public string FilePath => txtFilePath.Text.Trim();
+		public string ModelName => txtModelname.Text.Trim();
 		public UploadModelfileDialog()
 		{
 			InitializeComponent();
@@ -37,6 +26,11 @@ namespace Ollama_Frontend
 				MessageBox.Show($"Error parsing model file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				return;
 			}
+			/*string[] elines = System.IO.File.ReadAllLines(FilePath);
+			var emodelData = ModelfileParser.Parse(elines, txtModelname.Text);
+			MessageBox.Show($"FROM: {emodelData.from}\r\n\r\nSYSTEM PROMPT: {emodelData.system}\r\n\r\nTEMPLATE: {emodelData.template}\r\n\r\nJSON: {JsonConvert.SerializeObject(emodelData)}");
+
+			DialogResult = DialogResult.Cancel;*/
 			DialogResult = DialogResult.OK;
 			Close();
 		}

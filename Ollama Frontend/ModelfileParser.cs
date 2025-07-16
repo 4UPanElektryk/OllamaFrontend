@@ -30,9 +30,9 @@ namespace Ollama_Frontend
 
 				if (inMultiline)
 				{
-					if (line.EndsWith("\""))
+					if (line.EndsWith("\"\"\""))
 					{
-						multilineBuffer.AppendLine(line.Substring(0, line.Length - 1));
+						multilineBuffer.AppendLine(line.Substring(0, line.Length - 3));
 						string result = multilineBuffer.ToString().TrimEnd();
 
 						if (currentDirective == "SYSTEM") systemPrompt = result;
@@ -75,11 +75,11 @@ namespace Ollama_Frontend
 				else if (line.StartsWith("SYSTEM ", StringComparison.OrdinalIgnoreCase))
 				{
 					string rest = line.Substring(7).Trim();
-					if (rest.StartsWith("\"") && !rest.EndsWith("\""))
+					if (rest.StartsWith("\""))
 					{
 						inMultiline = true;
 						currentDirective = "SYSTEM";
-						multilineBuffer.AppendLine(rest.Substring(1));
+						multilineBuffer.AppendLine(rest.Substring(3));
 					}
 					else
 					{
@@ -89,7 +89,7 @@ namespace Ollama_Frontend
 				else if (line.StartsWith("TEMPLATE ", StringComparison.OrdinalIgnoreCase))
 				{
 					string rest = line.Substring(9).Trim();
-					if (rest.StartsWith("\"") && !rest.EndsWith("\""))
+					if (rest.StartsWith("\""))
 					{
 						inMultiline = true;
 						currentDirective = "TEMPLATE";
@@ -120,7 +120,7 @@ namespace Ollama_Frontend
 			if (baseModel == null)
 			{
 				Console.WriteLine("Missing required 'FROM' directive.");
-				throw new MainForm.OllamaException("Missing required 'FROM' directive.");
+				throw new ModelfileParseException("Missing required 'FROM' directive.");
 			}
 
 			rqCreate createRequest = new rqCreate
@@ -150,5 +150,13 @@ namespace Ollama_Frontend
 			}
 			return input;
 		}
+	}
+	[Serializable]
+	public class ModelfileParseException : Exception
+	{
+		public ModelfileParseException(string message) : base(message) { }
+		public ModelfileParseException(string message, Exception innerException) : base(message, innerException) { }
+		public ModelfileParseException() { }
+		public ModelfileParseException(string message, string filePath) : base($"{message} in file: {filePath}") { }
 	}
 }
