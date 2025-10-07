@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OllamaApiClasses
+﻿namespace OllamaApiClasses
 {
 	public struct ChatMessage
 	{
@@ -12,6 +8,5 @@ namespace OllamaApiClasses
 		public string[] images { get; set; }
 		public string tool_calls { get; set; } // JSON string of tool calls, or null if no tool calls are made
 		public string tool_name { get; set; }
-
 	}
 }
