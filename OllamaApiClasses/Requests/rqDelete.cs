@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OllamaApiClasses.Requests
+﻿namespace OllamaApiClasses.Requests
 {
 	// DELETE /api/delete
 	public struct rqDelete

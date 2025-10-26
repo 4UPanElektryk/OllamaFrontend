@@ -4,7 +4,7 @@
 	public struct rqGenerate
 	{
 		//required
-		public string model { get; set; } 
+		public string model { get; set; }
 		// if prompt null model will just be loaded in memory
 		public string prompt { get; set; }
 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OllamaApiClasses.Requests
+﻿namespace OllamaApiClasses.Requests
 {
 	// POST /api/pull
 	public struct rqPull
