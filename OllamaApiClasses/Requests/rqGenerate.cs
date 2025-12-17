@@ -24,7 +24,7 @@
 		/// </summary>
 		public string keep_alive { get; set; }
 		public string suffix { get; set; }
-		public string images { get; set; }
+		public string[] images { get; set; }
 		public bool? think { get; set; } // default is false, set to true for thinking messages
 		public string options { get; set; } // JSON string of options, or null if no options are used
 
